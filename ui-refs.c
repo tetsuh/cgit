@@ -155,7 +155,7 @@ static int print_tag(struct refinfo *ref)
 	html("</td><td>");
 	if (info) {
 		if (info->tagger)
-			html(info->tagger);
+ 			html(to_pageencoding(info->tagger));
 	} else if (ref->object->type == OBJ_COMMIT) {
 		html(ref->commit->author);
 	}

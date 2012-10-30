@@ -22,7 +22,7 @@ static void print_tag_content(char *buf)
 	p = strchr(buf, '\n');
 	if (p)
 		*p = '\0';
-	html_txt(buf);
+	html_txt(to_pageencoding(buf));
 	html("</div>");
 	if (p) {
 		html("<div class='commit-msg'>");
@@ -77,7 +77,7 @@ void cgit_print_tag(char *revname)
 		}
 		if (info->tagger) {
 			html("<tr><td>tagged by</td><td>");
-			html_txt(info->tagger);
+			html_txt(to_pageencoding(info->tagger));
 			if (info->tagger_email && !ctx.cfg.noplainemail) {
 				html(" ");
 				html_txt(info->tagger_email);

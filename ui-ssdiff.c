@@ -207,7 +207,7 @@ static void print_part_with_lcs(char *class, char *line, char *lcs)
 			htmlf("</span>");
 			j += 1;
 		}
-		html_txt(c);
+		html_txt(to_pageencoding(c));
 	}
 }
 
@@ -243,7 +243,7 @@ static void print_ssdiff_line(char *class,
 		if (lcs)
 			print_part_with_lcs("del", old_line, lcs);
 		else
-			html_txt(old_line);
+			html_txt(to_pageencoding(old_line));
 	}
 
 	html("</td>\n");
@@ -264,7 +264,7 @@ static void print_ssdiff_line(char *class,
 		if (lcs)
 			print_part_with_lcs("add", new_line, lcs);
 		else
-			html_txt(new_line);
+			html_txt(to_pageencoding(new_line));
 	}
 
 	html("</td></tr>");
@@ -378,11 +378,11 @@ void cgit_ssdiff_line_cb(char *line, int len)
 		current_old_line += 1;
 	} else if (line[0] == '@') {
 		html("<tr><td colspan='4' class='hunk'>");
-		html_txt(line);
+		html_txt(to_pageencoding(line));
 		html("</td></tr>");
 	} else {
 		html("<tr><td colspan='4' class='ctx'>");
-		html_txt(line);
+		html_txt(to_pageencoding(line));
 		html("</td></tr>");
 	}
 	line[len - 1] = c;

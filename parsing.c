@@ -100,6 +100,7 @@ static char *parse_user(char *t, char **name, char **email, unsigned long *date)
 
 #ifdef NO_ICONV
 #define reencode(a, b, c)
+#define to_pageencoding(a)
 #else
 static const char *reencode(char **txt, const char *src_enc, const char *dst_enc)
 {
@@ -122,6 +123,16 @@ static const char *reencode(char **txt, const char *src_enc, const char *dst_enc
 	}
 	return *txt;
 }
+const char *to_pageencoding(const char *txt)
+{
+	if(is_encoding_utf8(PAGE_ENCODING) && !is_utf8(txt)) {
+		char *tmp = xstrdup(txt);
+		reencode(&tmp, FALLBACK_ENCODING, PAGE_ENCODING);
+		return tmp;
+	}
+	return txt;
+}
+
 #endif
 
 struct commitinfo *cgit_parse_commit(struct commit *commit)

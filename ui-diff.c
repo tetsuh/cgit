@@ -213,7 +213,7 @@ static void print_line(char *line, int len)
 
 	htmlf("<div class='%s'>", class);
 	line[len-1] = '\0';
-	html_txt(line);
+	html_txt(to_pageencoding(line));
 	html("</div>");
 	line[len-1] = c;
 }

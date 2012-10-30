@@ -58,7 +58,7 @@ static void print_text_buffer(const char *name, char *buf, unsigned long size)
 	}
 
 	html("<td class='lines'><pre><code>");
-	html_txt(buf);
+	html_txt(to_pageencoding(buf));
 	html("</code></pre></td></tr></table>\n");
 }
 

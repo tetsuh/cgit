@@ -98,6 +98,8 @@ static int print_object(const unsigned char *sha1, const char *path)
 	ctx.page.filename = path;
 	ctx.page.size = size;
 	ctx.page.etag = sha1_to_hex(sha1);
+	if(is_encoding_utf8(PAGE_ENCODING) && !is_utf8(buf)) /* best guess */
+		ctx.page.charset = FALLBACK_ENCODING;
 	cgit_print_http_headers(&ctx);
 	html_raw(buf, size);
 	/* If we allocated this, then casting away const is safe. */

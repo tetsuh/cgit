@@ -44,9 +44,11 @@
 
 
 /*
- * Default encoding
+ * Default encoding and fallback encoding in case blobs are not valid UTF-8
  */
 #define PAGE_ENCODING "UTF-8"
+#define FALLBACK_ENCODING "latin1"
+extern const char *to_pageencoding(const char *txt);
 
 typedef void (*configfn)(const char *name, const char *value);
 typedef void (*filepair_fn)(struct diff_filepair *pair);
